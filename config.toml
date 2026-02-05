@@ -1,0 +1,16 @@
+base_url = "http://localhost:8080"
+title = "Learn Japanese"
+description = "A simple blog for learning Japanese"
+default_language = "en"
+compile_sass = true
+minify_html = true
+
+[markdown]
+highlight_code = true
+
+[[taxonomies]]
+name = "tags"
+feed = true
+
+[extra]
+author = "Admin"

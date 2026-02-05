@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="hero">
+    <h1>{{ config.description }}</h1>
+    <p>Welcome to your minimal static blog.</p>
+</div>
+
+<section class="latest-posts">
+    <h2>Latest Posts</h2>
+    <ul>
+    {% set section = get_section(path="blog/_index.md") %}
+    {% for page in section.pages | slice(end=5) %}
+        <li>
+            <a href="{{ page.permalink }}">{{ page.title }}</a>
+            <span class="date">{{ page.date }}</span>
+        </li>
+    {% endfor %}
+    </ul>
+</section>
+{% endblock content %}

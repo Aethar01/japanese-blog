@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{{ config.title }}{% endblock title %}</title>
+    <meta name="description" content="{{ config.description }}">
+    <link rel="stylesheet" href="{{ get_url(path="style.css") }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <script>
+        // Immediately apply theme to prevent FOUC
+        (function() {
+            const storedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            if (storedTheme === 'dark' || (!storedTheme && prefersDark)) {
+                document.documentElement.classList.add('dark');
+            }
+        })();
+    </script>
+    <style>
+        /* Critical CSS could go here for 14kb optimization, but we'll keep the main css small */
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="{{ config.base_url }}" class="logo">{{ config.title }}</a>
+            <div class="nav-links">
+                <a href="{{ config.base_url }}">Home</a>
+                <a href="{{ get_url(path="@/blog/_index.md") }}">Blog</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %} {% endblock content %}
+    </main>
+
+    <footer>
+        <p>&copy; {{ now() | date(format="%Y") }} {{ config.title }}</p>
+    </footer>
+    <button id="theme-toggle" aria-label="Toggle Dark Mode">🌓</button>
+    <script>
+      const toggle = document.getElementById('theme-toggle');
+      
+      toggle.addEventListener('click', () => {
+          const isDark = document.documentElement.classList.toggle('dark');
+          localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      });
+    </script>
+</body>
+</html>

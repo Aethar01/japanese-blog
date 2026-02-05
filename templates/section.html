@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}{{ section.title }} | {{ config.title }}{% endblock title %}
+
+{% block content %}
+<div class="section-header">
+    <h1>{{ section.title }}</h1>
+</div>
+
+<ul class="post-list">
+    {% for page in section.pages %}
+    <li>
+        <a href="{{ page.permalink }}">{{ page.title }}</a>
+        <div class="summary">
+            {{ page.summary | default(value=page.content | striptags | truncate(length=200)) | safe }}
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock content %}
