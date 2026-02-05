@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{{ config.title }}{% endblock title %}</title>
     <meta name="description" content="{{ config.description }}">
-    <link rel="stylesheet" href="{{ get_url(path="style.css") }}">
+    <link rel="icon" href="{{ get_url(path="favicon.svg") }}">
+    <link rel="stylesheet" href="{{ get_url(path="style.css", cachebust=true) }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
     <script>
-        // Immediately apply theme to prevent FOUC
         (function() {
             const storedTheme = localStorage.getItem('theme');
             const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -20,14 +20,12 @@
             }
         })();
     </script>
-    <style>
-        /* Critical CSS could go here for 14kb optimization, but we'll keep the main css small */
-    </style>
 </head>
 <body>
     <header>
         <nav>
             <a href="{{ config.base_url }}" class="logo">{{ config.title }}</a>
+            <div class="page-title" id="header-title" aria-hidden="true"></div>
             <div class="nav-links">
                 <a href="{{ config.base_url }}">Home</a>
                 <a href="{{ get_url(path="@/blog/_index.md") }}">Blog</a>
@@ -50,6 +48,41 @@
           const isDark = document.documentElement.classList.toggle('dark');
           localStorage.setItem('theme', isDark ? 'dark' : 'light');
       });
+
+      // Dynamic Header Title Script
+      (function() {
+          const navbar = document.querySelector('header');
+          const headerTitle = document.getElementById('header-title');
+          // Target the hero section (home) or the post header (blog posts)
+          const triggerElement = document.querySelector('.hero, .post-header') || document.querySelector('h1');
+          const mainTitle = document.querySelector('h1');
+
+          if (headerTitle && triggerElement && navbar && mainTitle) {
+              headerTitle.textContent = mainTitle.textContent;
+              
+              const checkScroll = () => {
+                  try {
+                      const triggerRect = triggerElement.getBoundingClientRect();
+                      const navbarHeight = navbar.getBoundingClientRect().height;
+                      
+                      // Trigger when the top of the container hits the bottom of the navbar
+                      const isScrolledPast = triggerRect.bottom < navbarHeight;
+                      const hasClass = document.body.classList.contains('scrolled-past-title');
+
+                      if (isScrolledPast && !hasClass) {
+                          document.body.classList.add('scrolled-past-title');
+                      } else if (!isScrolledPast && hasClass) {
+                          document.body.classList.remove('scrolled-past-title');
+                      }
+                  } catch (e) {
+                      console.error('Dynamic Title: Error in scroll handler', e);
+                  }
+              };
+
+              window.addEventListener('scroll', checkScroll, { passive: true });
+              checkScroll();
+          }
+      })();
     </script>
 </body>
 </html>

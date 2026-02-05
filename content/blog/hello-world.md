@@ -1,17 +1,18 @@
 +++
-title = "Hello World & こんにちは世界"
+title = "First Post!"
 date = 2026-02-05
 [taxonomies]
-tags = ["rust", "japanese", "markdown"]
+tags = ["japanese", "test"]
 +++
 
-Welcome to my blog! This is a simple static site built with Zola.
+This is the first post on my new blog. As you can probably tell from the name of the site, the main topic will be Japanese. However, I'll probably just write about things that I find interesting.
 
-## Features
+## Site Details
 
-- **Markdown**: Easy to write.
-- **Fast**: Built in Rust.
-- **Japanese Support**: こんにちは、世界！ (Hello, World!)
+- **Statically Generated**: Using [Zola](https://www.getzola.org/) and self-hosted with [Docker](https://www.docker.com/).
+- **Simple Theme**: Made by myself. (You can switch between light and dark mode in the corner over there ↘)
+
+## Example Content
 
 Here is an example of an image:
 

@@ -1,6 +1,3 @@
-/* Modern Minimalist "Zen" Theme */
-
-/* Variables */
 :root {
     --color-bg: #f9f9f9;
     --color-surface: #ffffff;
@@ -16,8 +13,8 @@ html.dark {
     --color-surface: #1e1e1e;
     --color-text-main: #e0e0e0;
     --color-text-muted: #a0a0a0;
-    --color-accent: #ff7675; /* Lighter red for dark mode */
-    --color-link: #74b9ff;   /* Lighter blue for dark mode */
+    --color-accent: #ff7675;
+    --color-link: #74b9ff;
     --color-border: #2d3436;
 }
 
@@ -33,7 +30,7 @@ $color-link: var(--color-link);
 $color-border: var(--color-border);
 
 $spacing-unit: 1rem;
-$max-width: 760px;          /* Optimal reading width */
+$max-width: 760px;
 $radius: 8px;
 $shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
 $theme-duration: 0.3s;
@@ -47,7 +44,7 @@ body {
     font-family: $font-main;
     background-color: $color-bg;
     color: $color-text-main;
-    line-height: 1.8;       /* Generous line height for mixed EN/JP */
+    line-height: 1.8;
     margin: 0;
     padding: 0;
     -webkit-font-smoothing: antialiased;
@@ -72,7 +69,6 @@ a {
     }
 }
 
-/* Layout */
 header {
     background-color: $color-surface;
     box-shadow: $shadow;
@@ -85,19 +81,35 @@ header {
         max-width: $max-width;
         margin: 0 auto;
         padding: 0 $spacing-unit;
-        display: flex;
-        justify-content: space-between;
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
         align-items: center;
 
         .logo {
             font-weight: 700;
             font-size: 1.25rem;
             letter-spacing: -0.5px;
+            justify-self: start;
+        }
+
+        .page-title {
+            font-weight: 700;
+            font-size: 1rem;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 300px;
+            text-align: center;
+            pointer-events: none;
         }
 
         .nav-links {
             display: flex;
             gap: 1.5rem;
+            justify-self: end;
             
             a {
                 font-weight: 500;
@@ -107,6 +119,11 @@ header {
     }
 }
 
+body.scrolled-past-title header nav .page-title {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 main {
     max-width: $max-width;
     margin: 3rem auto;
@@ -114,12 +131,13 @@ main {
     min-height: 80vh;
 }
 
-/* Hero Section (Home) */
 .hero {
     text-align: center;
     padding: 3rem 0;
     margin-bottom: 3rem;
     border-bottom: 1px solid $color-border;
+    position: relative;
+    z-index: 1;
 
     h1 {
         font-size: 2.5rem;
@@ -133,7 +151,6 @@ main {
     }
 }
 
-/* Typography */
 h1, h2, h3, h4, h5, h6 {
     margin-top: 2.5rem;
     margin-bottom: 1rem;
@@ -149,7 +166,6 @@ p {
     margin-bottom: 1.5rem;
 }
 
-/* Blog List (Cards) */
 .latest-posts ul, .post-list {
     list-style: none;
     padding: 0;
@@ -164,7 +180,6 @@ p {
     box-shadow: $shadow;
     border: 1px solid transparent;
     
-    /* Transition everything smoothly for theme switch, but keep transform fast for hover */
     transition: transform 0.2s ease, 
                 box-shadow $theme-duration ease, 
                 background-color $theme-duration ease, 
@@ -202,10 +217,11 @@ p {
     }
 }
 
-/* Single Post */
 .post-header {
     text-align: center;
     margin-bottom: 3rem;
+    position: relative;
+    z-index: 1;
 
     h1 {
         font-size: 2.5rem;
@@ -241,7 +257,7 @@ p {
 }
 
 .post-content {
-    font-size: 1.1rem; /* Slightly larger reading size */
+    font-size: 1.1rem;
     
     img {
         max-width: 100%;
@@ -252,7 +268,7 @@ p {
     }
 
     code {
-        background-color: rgba(0,0,0,0.05); /* Use transparent bg for better dark mode blend */
+        background-color: rgba(0,0,0,0.05);
         padding: 0.2rem 0.4rem;
         border-radius: 4px;
         font-family: $font-code;
@@ -278,13 +294,12 @@ p {
         border-left: 4px solid $color-accent;
         margin: 2rem 0;
         padding: 0.5rem 0 0.5rem 1.5rem;
-        background: rgba(0,0,0,0.02); /* More subtle */
+        background: rgba(0,0,0,0.02);
         font-style: italic;
         color: $color-text-muted;
     }
 }
 
-/* Footer */
 footer {
     text-align: center;
     padding: 3rem 0;
@@ -294,7 +309,6 @@ footer {
     margin-top: 4rem;
 }
 
-/* Responsive */
 @media (max-width: 600px) {
     .hero h1 { font-size: 2rem; }
     main { margin-top: 1.5rem; }
@@ -338,4 +352,3 @@ footer {
         transform: translateY(0);
     }
 }
-
