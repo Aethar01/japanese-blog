@@ -354,9 +354,64 @@ footer {
 }
 
 @media (max-width: 600px) {
-    .hero h1 { font-size: 2rem; }
-    main { margin-top: 1.5rem; }
-    h1 { font-size: 1.75rem; }
+    html {
+        scroll-padding-top: 70px;
+    }
+
+    .hero {
+        padding: 2rem 0;
+        margin-bottom: 2rem;
+        
+        h1 { font-size: 2rem; }
+        p { font-size: 1rem; }
+    }
+
+    header {
+        padding: 0.5rem 0;
+
+        nav {
+            grid-template-columns: auto 1fr auto; // Prioritize logo and links
+            gap: 0.5rem;
+
+            .page-title {
+                display: none; // Hide dynamic title on small screens to save space
+            }
+            
+            .logo {
+                font-size: 1.1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                justify-self: end;
+                
+                a { font-size: 0.9rem; }
+            }
+        }
+    }
+
+    main { 
+        margin: 1.5rem auto;
+        padding: 0 1rem;
+    }
+    
+    h1 { font-size: 1.75rem; margin-top: 2rem; }
+    h2 { font-size: 1.4rem; margin-top: 1.75rem; }
+    h3 { font-size: 1.2rem; }
+
+    .post-header {
+        margin-bottom: 2rem;
+        
+        h1 { font-size: 1.8rem; }
+    }
+
+    #theme-toggle {
+        width: 3.2rem;
+        height: 3.2rem;
+        bottom: 1.5rem;
+        right: 1.5rem;
+        font-size: 1.1rem;
+    }
 }
 
 #theme-toggle {
