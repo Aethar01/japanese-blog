@@ -382,16 +382,18 @@ footer {
             
             .logo {
                 font-size: 1.2rem;
-                flex-shrink: 0; // Prevent logo from shrinking
+                flex-shrink: 0;
+                white-space: nowrap; // Prevent title from splitting into multiple lines
             }
 
             .nav-links {
-                gap: 1.2rem;
-                justify-self: auto; // Reset grid property
+                gap: 1rem;
+                justify-self: auto;
+                white-space: nowrap; // Keep links on one line
                 
                 a { 
-                    font-size: 1rem; 
-                    padding: 0.25rem 0; // larger touch target
+                    font-size: 0.95rem; 
+                    padding: 0.25rem 0;
                 }
             }
         }
