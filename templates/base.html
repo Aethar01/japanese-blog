@@ -38,7 +38,7 @@
     </main>
 
     <footer>
-        <p>&copy; {{ now() | date(format="%Y") }} {{ config.title }}</p>
+        <p>&copy; {{ now() | date(format="%Y") }} {{ config.title }} &bull; <a href="https://github.com/{{ config.extra.github }}" target="_blank" rel="noopener noreferrer">GitHub</a></p>
     </footer>
     <button id="theme-toggle" aria-label="Toggle Dark Mode">🌓</button>
     <script>
@@ -82,6 +82,43 @@
               window.addEventListener('scroll', checkScroll, { passive: true });
               checkScroll();
           }
+      })();
+
+      // Heading Anchors with Copy to Clipboard
+      (function() {
+          const headings = document.querySelectorAll('.post-content h1, .post-content h2, .post-content h3, .post-content h4, .post-content h5, .post-content h6');
+          
+          headings.forEach(heading => {
+              if (!heading.id) return;
+
+              const anchor = document.createElement('span');
+              anchor.className = 'heading-anchor';
+              anchor.textContent = '#';
+              anchor.title = 'Copy link to clipboard';
+              anchor.setAttribute('aria-hidden', 'true');
+
+              anchor.addEventListener('click', async (e) => {
+                  e.stopPropagation();
+                  const url = window.location.origin + window.location.pathname + '#' + heading.id;
+                  
+                  try {
+                      await navigator.clipboard.writeText(url);
+                      
+                      const originalText = anchor.textContent;
+                      anchor.textContent = 'Copied!';
+                      anchor.classList.add('copied');
+                      
+                      setTimeout(() => {
+                          anchor.textContent = originalText;
+                          anchor.classList.remove('copied');
+                      }, 2000);
+                  } catch (err) {
+                      console.error('Failed to copy: ', err);
+                  }
+              });
+
+              heading.appendChild(anchor);
+          });
       })();
     </script>
 </body>

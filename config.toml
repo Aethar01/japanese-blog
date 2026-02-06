@@ -1,6 +1,6 @@
 base_url = "http://localhost:8080"
 title = "日語道"
-description = "Japanese with Elliott"
+description = "日語道 - Japanese with Elliott"
 default_language = "en"
 compile_sass = true
 minify_html = true
@@ -14,3 +14,4 @@ feed = true
 
 [extra]
 author = "Elliott Ashby"
+github = "Aethar01"
