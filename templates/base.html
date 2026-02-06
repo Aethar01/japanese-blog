@@ -38,7 +38,11 @@
     </main>
 
     <footer>
-        <p>&copy; {{ now() | date(format="%Y") }} {{ config.title }} &bull; <a href="https://github.com/{{ config.extra.github }}" target="_blank" rel="noopener noreferrer">GitHub</a></p>
+        <p>
+            &copy; {{ now() | date(format="%Y") }} {{ config.title }} &bull; 
+            <a href="https://github.com/{{ config.extra.github }}" target="_blank" rel="noopener noreferrer">GitHub</a> &bull;
+            <a href="{{ get_url(path="atom.xml") | safe }}">RSS Feed</a>
+        </p>
     </footer>
     <button id="theme-toggle" aria-label="Toggle Dark Mode">🌓</button>
     <script>
