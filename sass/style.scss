@@ -367,25 +367,32 @@ footer {
     }
 
     header {
-        padding: 0.5rem 0;
+        padding: 0.75rem 0;
 
         nav {
-            grid-template-columns: auto 1fr auto; // Prioritize logo and links
-            gap: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            grid-template-columns: none; // Override grid
+            gap: 1rem;
 
             .page-title {
-                display: none; // Hide dynamic title on small screens to save space
+                display: none; 
             }
             
             .logo {
-                font-size: 1.1rem;
+                font-size: 1.2rem;
+                flex-shrink: 0; // Prevent logo from shrinking
             }
 
             .nav-links {
-                gap: 1rem;
-                justify-self: end;
+                gap: 1.2rem;
+                justify-self: auto; // Reset grid property
                 
-                a { font-size: 0.9rem; }
+                a { 
+                    font-size: 1rem; 
+                    padding: 0.25rem 0; // larger touch target
+                }
             }
         }
     }
